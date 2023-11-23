@@ -2,7 +2,6 @@
 
 set -euo pipefail
 
-# TODO: Ensure this is the correct GitHub homepage where releases can be downloaded for moon.
 GH_REPO="https://github.com/moonrepo/moon"
 TOOL_NAME="moon"
 TOOL_TEST="moon --version"
@@ -34,14 +33,47 @@ list_all_versions() {
 }
 
 download_release() {
-	local version filename url
+	local version filename url target
+  target="$(get_target)"
 	version="$1"
 	filename="$2"
 
-	url="$GH_REPO/archive/v${version}.tar.gz"
+  #Ex: https://github.com/moonrepo/moon/releases/download/v1.17.3/moon-aarch64-apple-darwin
+	url="$GH_REPO/releases/download/v${version}/${target}"
 
-	echo "* Downloading $TOOL_NAME release $version..."
+	echo "* Downloading $TOOL_NAME release $version for target ${target}..."
 	curl "${curl_opts[@]}" -o "$filename" -C - "$url" || fail "Could not download $url"
+}
+
+get_target() {
+  arch=$(uname -sm)
+
+  if [[ "${OS-}" == "Windows_NT" ]]; then
+    target="moon-x86_64-pc-windows-msvc.exe"
+  else
+    case "$arch" in
+    "Darwin x86_64") target="moon-x86_64-apple-darwin" ;;
+    "Darwin arm64") target="moon-aarch64-apple-darwin" ;;
+    "Linux aarch64") target="moon-aarch64-unknown-linux" ;;
+    "Linux x86_64") target="moon-x86_64-unknown-linux" ;;
+    *)
+      echo "Unsupported system or architecture \"$arch\". Unable to install moon!"
+      exit 1
+    ;;
+    esac
+  fi
+
+  if [[ "$arch" == "Linux"* ]]; then
+    deps=$(ldd --version 2>&1 || true)
+
+    if [[ $deps == *"musl"* ]]; then
+      target="$target-musl"
+    else
+      target="$target-gnu"
+    fi
+  fi
+
+  echo $target
 }
 
 install_version() {
@@ -54,8 +86,13 @@ install_version() {
 	fi
 
 	(
+    echo "* Installing $TOOL_NAME $version..."
 		mkdir -p "$install_path"
 		cp -r "$ASDF_DOWNLOAD_PATH"/* "$install_path"
+    chmod 755 "$install_path/$TOOL_NAME"
+
+    echo $install_path
+    ls $install_path
 
 		local tool_cmd
 		tool_cmd="$(echo "$TOOL_TEST" | cut -d' ' -f1)"
