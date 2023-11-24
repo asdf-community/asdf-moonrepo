@@ -34,11 +34,11 @@ list_all_versions() {
 
 download_release() {
 	local version filename url target
-  target="$(get_target)"
+	target="$(get_target)"
 	version="$1"
 	filename="$2"
 
-  #Ex: https://github.com/moonrepo/moon/releases/download/v1.17.3/moon-aarch64-apple-darwin
+	#Ex: https://github.com/moonrepo/moon/releases/download/v1.17.3/moon-aarch64-apple-darwin
 	url="$GH_REPO/releases/download/v${version}/${target}"
 
 	echo "* Downloading $TOOL_NAME release $version for target ${target}..."
@@ -46,34 +46,34 @@ download_release() {
 }
 
 get_target() {
-  arch=$(uname -sm)
+	arch=$(uname -sm)
 
-  if [[ "${OS-}" == "Windows_NT" ]]; then
-    target="moon-x86_64-pc-windows-msvc.exe"
-  else
-    case "$arch" in
-    "Darwin x86_64") target="moon-x86_64-apple-darwin" ;;
-    "Darwin arm64") target="moon-aarch64-apple-darwin" ;;
-    "Linux aarch64") target="moon-aarch64-unknown-linux" ;;
-    "Linux x86_64") target="moon-x86_64-unknown-linux" ;;
-    *)
-      echo "Unsupported system or architecture \"$arch\". Unable to install moon!"
-      exit 1
-    ;;
-    esac
-  fi
+	if [[ "${OS-}" == "Windows_NT" ]]; then
+		target="moon-x86_64-pc-windows-msvc.exe"
+	else
+		case "$arch" in
+		"Darwin x86_64") target="moon-x86_64-apple-darwin" ;;
+		"Darwin arm64") target="moon-aarch64-apple-darwin" ;;
+		"Linux aarch64") target="moon-aarch64-unknown-linux" ;;
+		"Linux x86_64") target="moon-x86_64-unknown-linux" ;;
+		*)
+			echo "Unsupported system or architecture \"$arch\". Unable to install moon!"
+			exit 1
+			;;
+		esac
+	fi
 
-  if [[ "$arch" == "Linux"* ]]; then
-    deps=$(ldd --version 2>&1 || true)
+	if [[ "$arch" == "Linux"* ]]; then
+		deps=$(ldd --version 2>&1 || true)
 
-    if [[ $deps == *"musl"* ]]; then
-      target="$target-musl"
-    else
-      target="$target-gnu"
-    fi
-  fi
+		if [[ $deps == *"musl"* ]]; then
+			target="$target-musl"
+		else
+			target="$target-gnu"
+		fi
+	fi
 
-  echo $target
+	echo $target
 }
 
 install_version() {
@@ -82,14 +82,14 @@ install_version() {
 	local install_path="${3%/bin}/bin"
 
 	if [ "$install_type" != "version" ]; then
-		fail "asdf-$TOOL_NAME supports release installs only"
+		fail "asdf-$TOOL_NAME supports release installs only!"
 	fi
 
 	(
-    echo "* Installing $TOOL_NAME $version..."
+		echo "* Installing $TOOL_NAME $version..."
 		mkdir -p "$install_path"
 		cp -r "$ASDF_DOWNLOAD_PATH"/* "$install_path"
-    chmod 755 "$install_path/$TOOL_NAME"
+		chmod 755 "$install_path/$TOOL_NAME"
 
 		local tool_cmd
 		tool_cmd="$(echo "$TOOL_TEST" | cut -d' ' -f1)"
