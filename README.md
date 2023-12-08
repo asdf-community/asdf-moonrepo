@@ -1,6 +1,6 @@
 <div align="center">
 
-# asdf-moon [![Build](https://github.com/ethanjdiamond/asdf-moon/actions/workflows/build.yml/badge.svg)](https://github.com/ethanjdiamond/asdf-moon/actions/workflows/build.yml) [![Lint](https://github.com/ethanjdiamond/asdf-moon/actions/workflows/lint.yml/badge.svg)](https://github.com/ethanjdiamond/asdf-moon/actions/workflows/lint.yml)
+# asdf-moonrepo [![Build](https://github.com/ethanjdiamond/asdf-moonrepo/actions/workflows/build.yml/badge.svg)](https://github.com/ethanjdiamond/asdf-moonrepo/actions/workflows/build.yml) [![Lint](https://github.com/ethanjdiamond/asdf-moonrepo/actions/workflows/lint.yml/badge.svg)](https://github.com/ethanjdiamond/asdf-moonrepo/actions/workflows/lint.yml)
 
 [moon](https://moonrepo.dev/moon) plugin for the [asdf version manager](https://asdf-vm.com).
 
@@ -22,20 +22,20 @@
 Plugin:
 
 ```shell
-asdf plugin add moon https://github.com/ethanjdiamond/asdf-moon.git
+asdf plugin add moonrepo https://github.com/ethanjdiamond/asdf-moonrepo.git
 ```
 
 moon:
 
 ```shell
 # Show all installable versions
-asdf list-all moon
+asdf list-all moonrepo
 
 # Install specific version
-asdf install moon latest
+asdf install moonrepo latest
 
 # Set a version globally (on your ~/.tool-versions file)
-asdf global moon latest
+asdf global moonrepo latest
 
 # Now moon commands are available
 moon --version
@@ -48,7 +48,7 @@ install & manage versions.
 
 Contributions of any kind welcome! See the [contributing guide](contributing.md).
 
-[Thanks goes to these contributors](https://github.com/ethanjdiamond/asdf-moon/graphs/contributors)!
+[Thanks goes to these contributors](https://github.com/ethanjdiamond/asdf-moonrepo/graphs/contributors)!
 
 # License
 
