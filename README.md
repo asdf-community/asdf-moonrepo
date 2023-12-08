@@ -1,6 +1,6 @@
 <div align="center">
 
-# asdf-moonrepo [![Build](https://github.com/ethanjdiamond/asdf-moonrepo/actions/workflows/build.yml/badge.svg)](https://github.com/ethanjdiamond/asdf-moonrepo/actions/workflows/build.yml) [![Lint](https://github.com/ethanjdiamond/asdf-moonrepo/actions/workflows/lint.yml/badge.svg)](https://github.com/ethanjdiamond/asdf-moonrepo/actions/workflows/lint.yml)
+# asdf-moonrepo [![Build](https://github.com/asdf-community/asdf-moonrepo/actions/workflows/build.yml/badge.svg)](https://github.com/asdf-community/asdf-moonrepo/actions/workflows/build.yml) [![Lint](https://github.com/asdf-community/asdf-moonrepo/actions/workflows/lint.yml/badge.svg)](https://github.com/asdf-community/asdf-moonrepo/actions/workflows/lint.yml)
 
 [moon](https://moonrepo.dev/moon) plugin for the [asdf version manager](https://asdf-vm.com).
 
@@ -22,7 +22,7 @@
 Plugin:
 
 ```shell
-asdf plugin add moonrepo https://github.com/ethanjdiamond/asdf-moonrepo.git
+asdf plugin add moonrepo https://github.com/asdf-community/asdf-moonrepo.git
 ```
 
 moon:
@@ -48,7 +48,7 @@ install & manage versions.
 
 Contributions of any kind welcome! See the [contributing guide](contributing.md).
 
-[Thanks goes to these contributors](https://github.com/ethanjdiamond/asdf-moonrepo/graphs/contributors)!
+[Thanks goes to these contributors](https://github.com/asdf-community/asdf-moonrepo/graphs/contributors)!
 
 # License
 
